@@ -20,7 +20,7 @@
             <div class="input-group w-25">
               <input type="search" formControlName="keyword" class="form-control rounded mx-2" placeholder="Search"
                      aria-label="Search"/>
-              <button type="submit" class="btn btn-outline-primary">Search</button>
+              <button type="submit" class="btn btn-outline-primary rounded">Search</button>
             </div>
           </form>
         </div>
@@ -67,7 +67,7 @@
         </table>
         <ul class="nav nav-pills">
         <!-- Looping through the listCourses.totalPages and creating the pagination -->
-          <!-- <li *ngFor="let item of [].constructor(listCourses.totalPages); let page=index"><a [ngClass]="page==currentPage? 'btn-info':'btn-outline-info'" (click)="gotoPage(page)" class="btn mb-1 ms-1 mt-1">{{page}}</a></li> -->
+          <li *ngFor="let item of [].constructor(listCourses.totalPages); let page=index"><a [ngClass]="page==currentPage? 'btn-info':'btn-outline-info'" (click)="gotoPage(page)" class="btn mb-1 ms-1 mt-1">{{page}}</a></li>
         </ul>
       </ng-container>
 
