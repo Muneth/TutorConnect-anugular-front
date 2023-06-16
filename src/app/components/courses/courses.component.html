@@ -92,7 +92,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <div class="modal-title text-muted"><i class="fa-regular fa-circle-dot"></i>&nbsp; Course Form</div>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.close('Cross click')"></button>
   </div>
 
   <!-- Checking if instructors$ exists and assigning it to listInstructors else display the failureOrLoading -->
@@ -108,7 +108,7 @@
                      [ngClass]="{'is-invalid' : submitted && courseFormGroup.controls['courseName'].errors}"
                      formControlName="courseName">
               <div *ngIf="submitted && courseFormGroup.controls['courseName'].errors" class="invalid-feedback">
-                <div *ngIf="courseFormGroup.controls['courseName'].errors['required']">Course Name is Required</div>
+                <div *ngIf="courseFormGroup.controls['courseName'].errors?.['required']">Course Name is Required</div>
               </div>
             </div>
           </div>
@@ -119,7 +119,7 @@
                      [ngClass]="{'is-invalid' : submitted && courseFormGroup.controls['courseDuration'].errors}"
                      formControlName="courseDuration">
               <div *ngIf="submitted && courseFormGroup.controls['courseDuration'].errors" class="invalid-feedback">
-                <div *ngIf="courseFormGroup.controls['courseDuration'].errors['required']">Course Duration is Required
+                <div *ngIf="courseFormGroup.controls['courseDuration'].errors?.['required']">Course Duration is Required
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@
                      [ngClass]="{'is-invalid' : submitted && courseFormGroup.controls['courseDescription'].errors}"
                      formControlName="courseDescription">
               <div *ngIf="submitted && courseFormGroup.controls['courseDescription'].errors" class="invalid-feedback">
-                <div *ngIf="courseFormGroup.controls['courseDescription'].errors['required']">Course Description is
+                <div *ngIf="courseFormGroup.controls['courseDescription'].errors?.['required']">Course Description is
                   Required
                 </div>
               </div>
@@ -149,7 +149,7 @@
                 <option *ngFor="let i of listInstructors" [ngValue]="i">{{i.firstName}} {{i.lastName}}</option>
               </select>
               <div *ngIf="submitted && courseFormGroup.controls['instructor'].errors" class="invalid-feedback">
-                <div *ngIf="courseFormGroup.controls['instructor'].errors['required']">Instructor is
+                <div *ngIf="courseFormGroup.controls['instructor'].errors?.['required']">Instructor is
                   Required
                 </div>
               </div>
@@ -185,7 +185,7 @@
 <ng-template #updateContent let-updateModal>
   <div class="modal-header">
     <div class="modal-title text-muted"><i class="fa-regular fa-circle-dot"></i>&nbsp; Update Course Form</div>
-    <button type="button" class="btn-close" aria-label="Close" (click)="updateModal.dismiss('Cross click')"></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="updateModal.close('Cross click')"></button>
   </div>
   <ng-container *ngIf="instructors$ | async as listInstructors; else modalFailureOrLoading">
     <form [formGroup]="updateCourseFormGroup" method="post">
@@ -205,7 +205,7 @@
                      [ngClass]="{'is-invalid' : submitted && updateCourseFormGroup.controls['courseName'].errors}"
                      formControlName="courseName">
               <div *ngIf="submitted && updateCourseFormGroup.controls['courseName'].errors" class="invalid-feedback">
-                <div *ngIf="updateCourseFormGroup.controls['courseName'].errors['required']">Course Name is Required
+                <div *ngIf="updateCourseFormGroup.controls['courseName'].errors?.['required']">Course Name is Required
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@
                      formControlName="courseDuration">
               <div *ngIf="submitted && updateCourseFormGroup.controls['courseDuration'].errors"
                    class="invalid-feedback">
-                <div *ngIf="updateCourseFormGroup.controls['courseDuration'].errors['required']">Course Duration is
+                <div *ngIf="updateCourseFormGroup.controls['courseDuration'].errors?.['required']">Course Duration is
                   Required
                 </div>
               </div>
@@ -232,7 +232,7 @@
                      formControlName="courseDescription">
               <div *ngIf="submitted && updateCourseFormGroup.controls['courseDescription'].errors"
                    class="invalid-feedback">
-                <div *ngIf="updateCourseFormGroup.controls['courseDescription'].errors['required']">Course Description
+                <div *ngIf="updateCourseFormGroup.controls['courseDescription'].errors?.['required']">Course Description
                   is
                   Required
                 </div>
@@ -251,7 +251,7 @@
                 <option *ngFor="let i of listInstructors" [ngValue]="i">{{i.firstName}} {{i.lastName}}</option>
               </select>
               <div *ngIf="submitted && updateCourseFormGroup.controls['instructor'].errors" class="invalid-feedback">
-                <div *ngIf="updateCourseFormGroup.controls['instructor'].errors['required']">Instructor is
+                <div *ngIf="updateCourseFormGroup.controls['instructor'].errors?.['required']">Instructor is
                   Required
                 </div>
               </div>

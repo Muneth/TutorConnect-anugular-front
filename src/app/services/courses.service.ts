@@ -12,11 +12,12 @@ export class CoursesService {
 
   constructor(private http: HttpClient) { }
 
-// The searchCourses() method is of type Observable<PageResponse<Course>> and takes three parameters as input: keyword, currentPage, and pageSize for the API call and Return as type Observable<PageResponse<Course>>.'
+// The searchCourses() method is of type Observable<PageResponse<Course>> and takes three parameters as input: keyword, currentPage, and pageSize for the API call and Return as type Observable<PageResponse<Course>>.
+
   public searchCourses(keyword: string, currentPage: number, pageSize: number): Observable<PageResponse<Course>> {
     return this.http.get<PageResponse<Course>>(environment.backendHost + "/courses?keyword=" + keyword + "&page=" + currentPage + "&size=" + pageSize);
   }
-  
+
  public deleteCourse(courseId: number) {
     return this.http.delete(environment.backendHost + "/courses/" + courseId);
   }
@@ -29,17 +30,25 @@ export class CoursesService {
     return this.http.put<Course>(environment.backendHost + "/courses/" + courseId, course)
   }
 
+  // This method used to get the courses by instructor when the instructor is logged in and by admin to fetch the courses of a particular instructor.
+
   public getCoursesByInstructor(instructorId: number, currentPage: number, pageSize: number): Observable<PageResponse<Course>> {
     return this.http.get<PageResponse<Course>>(environment.backendHost + "/instructors/" + instructorId + "/courses?page=" + currentPage + "&size=" + pageSize);
   }
+
+  // This method fetch the courses already enrolled by the student.
 
   public getCoursesByStudent(studentId: number, currentPage: number, pageSize: number): Observable<PageResponse<Course>> {
     return this.http.get<PageResponse<Course>>(environment.backendHost + "/students/" + studentId + "/courses?page=" + currentPage + "&size=" + pageSize);
   }
 
+  // This method fetch the courses not enrolled by the student.
+
   public getNonEnrolledInCoursesByStudent(studentId: number, currentPage: number, pageSize: number): Observable<PageResponse<Course>> {
     return this.http.get<PageResponse<Course>>(environment.backendHost + "/students/" + studentId + "/other-courses?page=" + currentPage + "&size=" + pageSize);
   }
+
+  // This method for the student to enroll in a course.
 
   public enrollStudentInCourse(courseId: number, studentId: number) {
     return this.http.post(environment.backendHost + "/courses/" + courseId + "/enroll/students/" + studentId, null);
