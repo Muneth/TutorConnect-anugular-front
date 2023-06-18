@@ -19,7 +19,7 @@ import {AuthInterceptorService} from "./services/auth.interceptor.service";
 
 
 const appRoutes: Routes = [
-  {path: '', component: CoursesComponent},
+  {path: '', component: AuthenticationComponent},
   {path: 'students', component: StudentsComponent},
   {path: 'courses', component: CoursesComponent},
   {path: 'teachers', component: TeachersComponent},
