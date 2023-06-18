@@ -28,4 +28,13 @@ export class InstructorsService {
   public saveInstructor(instructor: Instructor): Observable<Instructor> {
     return this.http.post<Instructor>(environment.backendHost + "/instructors", instructor);
   }
+
+  // This method is used if role is Instructor after login and then redirect to instructor-courses with instructor data
+  public loadInstructorByEmail(email: string): Observable<Instructor> {
+    return this.http.get<Instructor>(environment.backendHost + "/instructors/find?email=" + email)
+  }
+
+  public updateInstructor(instructor: Instructor, instructorId: number): Observable<Instructor> {
+    return this.http.put<Instructor>(environment.backendHost + "/instructors/" + instructorId, instructor);
+  }
 }

@@ -11,9 +11,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CoursesInstructorComponent} from './components/courses-instructor/courses-instructor.component';
 import {CoursesStudentComponent} from './components/courses-student/courses-student.component';
+import { AuthenticationComponent } from './components/authentication/authentication.component';
+import {AuthInterceptorService} from "./services/auth.interceptor.service";
 
 
 const appRoutes: Routes = [
@@ -25,7 +27,7 @@ const appRoutes: Routes = [
   {path: 'student-courses/:id', component: CoursesStudentComponent},
   {path: 'navbar', component: NavbarComponent},
   {path: 'header', component: HeaderComponent},
-
+  {path: 'auth', component: AuthenticationComponent}
 ]
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     HeaderComponent,
     CoursesInstructorComponent,
-    CoursesStudentComponent
+    CoursesStudentComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,13 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
